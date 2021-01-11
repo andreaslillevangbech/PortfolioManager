@@ -7,7 +7,7 @@ from config import config
 layers = config["layers"]
 
 
-class CNN(tf.Module):
+class CNN(tf.keras.Model):
     name=''
     
     def __init__(self, rows = 11, cols = 50, features = 3, layers=None, name = 'GraphTest'):
@@ -61,8 +61,7 @@ class CNN(tf.Module):
         x = tf.squeeze(x)
         cash_bias = tf.tile(self.b, [tf.shape(x)[0], 1])
         x = tf.concat((cash_bias, x), axis = -1)
-        x = tf.nn.softmax(x)
-        return x
+        return tf.nn.softmax(x)
  
 model = CNN(layers=layers)
 
